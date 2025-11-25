@@ -38,22 +38,18 @@ function Products() {
       return;
     }
     setUser(currentUser);
-    loadProducts();
     loadCategories();
+    loadProducts();
   }, [navigate]);
 
   const loadProducts = async () => {
     setLoading(true);
     try {
-      const filters = {};
-      if (filterCategory) filters.categoria_id = filterCategory;
-      if (searchTerm) filters.search = searchTerm;
-      
-      const data = await productService.getAll(filters);
+      const data = await productService.getAll();
       setProducts(data);
     } catch (error) {
       console.error("Error loading products:", error);
-      alert(error.message || "Error al cargar productos");
+      // No mostrar alert, solo log
     } finally {
       setLoading(false);
     }
