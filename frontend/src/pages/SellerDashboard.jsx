@@ -60,16 +60,14 @@ function SellerDashboard() {
   const addToCart = (product, variant) => {
     const existingItem = cart.find(
       item => item.producto_id === product.id && 
-              item.talla === variant.talla && 
-              item.color === variant.color
+              item.producto_talla_id === variant.id
     );
 
     if (existingItem) {
       // Incrementar cantidad
       setCart(cart.map(item =>
         item.producto_id === product.id && 
-        item.talla === variant.talla && 
-        item.color === variant.color
+        item.producto_talla_id === variant.id
           ? { ...item, cantidad: item.cantidad + 1 }
           : item
       ));
@@ -79,6 +77,7 @@ function SellerDashboard() {
         ...cart,
         {
           producto_id: product.id,
+          producto_talla_id: variant.id,
           nombre: product.nombre,
           marca: product.marca,
           talla: variant.talla,
@@ -142,20 +141,12 @@ function SellerDashboard() {
     setLoading(true);
     try {
       // Preparar items de la factura
-      const items = cart.map(item => {
-        // Buscar el producto y variante para obtener el producto_talla_id
-        const producto = products.find(p => p.id === item.producto_id);
-        const variante = producto?.tallas?.find(v => 
-          v.talla === item.talla && v.color === item.color
-        );
-
-        return {
-          producto_id: item.producto_id,
-          producto_talla_id: variante?.id,
-          cantidad: item.cantidad,
-          precio_unitario: item.precio
-        };
-      });
+      const items = cart.map(item => ({
+        producto_id: item.producto_id,
+        producto_talla_id: item.producto_talla_id,
+        cantidad: item.cantidad,
+        precio_unitario: item.precio
+      }));
 
       const facturaData = {
         cliente_nombre: clienteNombre,
