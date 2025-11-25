@@ -37,6 +37,33 @@ function App() {
             <PrivateRoute>
               <DashboardRouter />
             </PrivateRoute>
+          } 
+        />
+
+        {/* Dashboard Administrativo (solo owner y admin) */}
+        <Route 
+          path="/admin/dashboard" 
+          element={
+            <PrivateRoute>
+              <RoleProtectedRoute allowedRoles={['owner', 'admin']}>
+                <Dashboard />
+              </RoleProtectedRoute>
+            </PrivateRoute>
+          } 
+        />
+
+        {/* Dashboard de Vendedor (vendedor y solo_lectura) */}
+        <Route 
+          path="/seller/dashboard" 
+          element={
+            <PrivateRoute>
+              <RoleProtectedRoute allowedRoles={['vendedor', 'solo_lectura']}>
+                <SellerDashboard />
+              </RoleProtectedRoute>
+            </PrivateRoute>
+          } 
+        />
+
         {/* Rutas administrativas (solo owner y admin) */}
         <Route 
           path="/productos" 
@@ -67,7 +94,7 @@ function App() {
               </RoleProtectedRoute>
             </PrivateRoute>
           } 
-        />  </PrivateRoute>
+        />
           } 
         />
         <Route 
