@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Login from './pages/login';
 import Register from './pages/register';
 import Dashboard from './pages/dashboard';
+import Products from './pages/Products';
 import Pricing from './pages/pricing';
 import Checkout from './pages/checkout';
 import PaymentSuccess from './pages/PaymentSuccess';
@@ -30,6 +31,14 @@ function App() {
           element={
             <PrivateRoute>
               <Dashboard />
+            </PrivateRoute>
+          } 
+        />
+        <Route 
+          path="/productos" 
+          element={
+            <PrivateRoute>
+              <Products />
             </PrivateRoute>
           } 
         />
