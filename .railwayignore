@@ -1,0 +1,7 @@
+# Backend files moved to root
+src/
+package.json
+.env
+
+# Keep backend folder
+!backend/
