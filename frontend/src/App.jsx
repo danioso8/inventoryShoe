@@ -4,6 +4,7 @@ import Register from './pages/register';
 import Dashboard from './pages/dashboard';
 import SellerDashboard from './pages/SellerDashboard';
 import Products from './pages/Products';
+import Users from './pages/Users';
 import Pricing from './pages/pricing';
 import Checkout from './pages/checkout';
 import PaymentSuccess from './pages/PaymentSuccess';
@@ -66,6 +67,16 @@ function App() {
 
         {/* Rutas administrativas (solo owner y admin) */}
         <Route 
+          path="/usuarios" 
+          element={
+            <PrivateRoute>
+              <RoleProtectedRoute allowedRoles={['owner', 'admin']}>
+                <Users />
+              </RoleProtectedRoute>
+            </PrivateRoute>
+          } 
+        />
+        <Route 
           path="/productos" 
           element={
             <PrivateRoute>
@@ -92,32 +103,6 @@ function App() {
               <RoleProtectedRoute allowedRoles={['owner', 'admin']}>
                 <Dashboard />
               </RoleProtectedRoute>
-            </PrivateRoute>
-          } 
-        />
-          } 
-        />
-        <Route 
-          path="/productos" 
-          element={
-            <PrivateRoute>
-              <Products />
-            </PrivateRoute>
-          } 
-        />
-        <Route 
-          path="/facturas" 
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          } 
-        />
-        <Route 
-          path="/reportes" 
-          element={
-            <PrivateRoute>
-              <Dashboard />
             </PrivateRoute>
           } 
         />
