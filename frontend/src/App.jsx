@@ -42,6 +42,22 @@ function App() {
             </PrivateRoute>
           } 
         />
+        <Route 
+          path="/facturas" 
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          } 
+        />
+        <Route 
+          path="/reportes" 
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          } 
+        />
       </Routes>
     </BrowserRouter>
   );
